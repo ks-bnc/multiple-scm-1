@@ -42,6 +42,12 @@ pipeline {
 
 
                         }
+               stage ('preTest'){
+                      steps {
+                      sh './gradlew check'
+                      }
+               
+               }
 
 
                         stage('Test') {
