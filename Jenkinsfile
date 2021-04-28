@@ -21,7 +21,6 @@ pipeline {
             stage('Checkout') {
                 steps {
                        sh 'mvn --version'
-                       sh 'npm --version'
                        sh 'docker --version'
 
                       echo "Build"
@@ -34,37 +33,18 @@ pipeline {
                 }
             }
 
-                       // stage('Compile'){
-                          //  steps {
-                            //    sh "mvn clean compile"
-                            //}
-                        //}
-               stage ('preTest'){
-                      steps {
-                      sh 'npm test'
-                      }
+                       stage('Compile'){
+                            steps {
+                                sh "mvn clean compile"
+                            }
+                        }
                
-               }
-
-
                         stage('Test') {
                             steps {
                             	sh "mvn test"
                             }
                         }
-                                    stage('Integration Test') {
-                                        steps {
-                                            sh "mvn failsafe:integration-test failsafe:verify"
-                                        }
-                                    }
-                                    stage('Package') {
-                                            steps {
-                                              sh "mvn package -DskipTests"
-                             }
-                        }
-
-
-
+                                 
                         stage ('Build docker image') {
                             steps {
                             script {
