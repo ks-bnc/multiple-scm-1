@@ -21,6 +21,7 @@ pipeline {
             stage('Checkout') {
                 steps {
                        sh 'mvn --version'
+                       sh 'npm --version'
                        sh 'docker --version'
 
                       echo "Build"
@@ -40,7 +41,7 @@ pipeline {
                         //}
                stage ('preTest'){
                       steps {
-                      sh './gradlew check'
+                      sh 'npm test'
                       }
                
                }
